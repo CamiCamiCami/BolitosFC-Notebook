@@ -1,0 +1,16 @@
+define info
+info locals
+p inicios.top()
+p finales.top()
+end
+
+define cinfo
+c
+info
+end
+
+define rinfo
+r
+info
+end
+

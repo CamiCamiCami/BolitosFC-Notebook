@@ -1,0 +1,7 @@
+*
+!*/
+!makefile
+!*.cpp
+!comandosDebug
+!.gitignore
+!.clang-format

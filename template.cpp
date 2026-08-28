@@ -16,14 +16,19 @@
     for (int i = 0; i < largo; i++)    \
         arr[i] = contenido;
 using namespace std;
+using Par = pair<ll, ll>;
 using GrafoPesado = vector<vector<pair<ll, ll>>>;
 using Grafo = vector<vector<ll>>;
 using Arbol = vector<vector<ll>>;
 
 int main() {
+#ifdef LOCAL
+    freopen("input.txt", "r", stdin);
+#endif
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     ll casos;
-    cin >> casos;
-    while (casos--) {}
+    while (cin >> casos) {
+        while (casos--) {}
+    }
 }
