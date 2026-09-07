@@ -38,21 +38,18 @@ ll busquedaBinaria(ll desde, ll hasta) {
 /* Binary search de Gaspi (nunca la entendí)*/
 bool func(ll x);
 
-long long solve(long long min_val, long long max_val) {
-    long long L = min_val;
-    long long R = max_val;
-    long long ans = -1;  // Guarda la mejor respuesta encontrada hasta ahora
+ll solve(ll min_val, ll max_val) {
+    ll L = min_val;
+    ll R = max_val;
+    ll ans = -1;
     while (L <= R) {
-        // L + (R - L) / 2 previene overflow que pasaría si usas (L + R) / 2
-        long long mid = L + (R - L) / 2;
-
+        ll mid = L + (R - L) / 2;
         if (func(mid)) {
-            ans = mid;    // mid es válido, lo guardamos como posible respuesta
-            R = mid - 1;  // Como queremos el menor valor, buscamos más a la izquierda
+            ans = mid;
+            R = mid - 1;
         } else {
-            L = mid + 1;  // mid no es válido (dio false), buscamos a la derecha
+            L = mid + 1;
         }
     }
-
-    return ans;  // Al final del ciclo, 'ans' tiene el primer 'true'
+    return ans;
 }

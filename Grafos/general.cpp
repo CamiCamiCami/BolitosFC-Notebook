@@ -1,10 +1,10 @@
+#include <algorithm>
 #include <iostream>
 #include <list>
 #include <map>
 #include <queue>
 #include <set>
 #include <utility>
-#include <algorithm>
 #include <vector>
 #define ll long long
 #define dd long double
@@ -21,12 +21,10 @@ using Arbol = vector<vector<ll>>;
 
 /* Calcular Altura */
 
-void __calcularAlturas(Arbol &g, ll raiz, vector<ll> &altura, vector<bool> &visitado)
-{
+void __calcularAlturas(Arbol& g, ll raiz, vector<ll>& altura, vector<bool>& visitado) {
     visitado[raiz] = true;
     ll maxAltura = 0;
-    for (ll vecino : g[raiz])
-    {
+    for (ll vecino : g[raiz]) {
         if (visitado[vecino])
             continue;
         __calcularAlturas(g, vecino, altura, visitado);
@@ -35,35 +33,29 @@ void __calcularAlturas(Arbol &g, ll raiz, vector<ll> &altura, vector<bool> &visi
     altura[raiz] = maxAltura;
 }
 
-void calcularAlturas(Arbol &g, ll raiz, vector<ll> &altura)
-{
+void calcularAlturas(Arbol& g, ll raiz, vector<ll>& altura) {
     vector<bool> visitados(g.size(), false);
     __calcularAlturas(g, raiz, altura, visitados);
 }
 
 /* Maxima distancia desde un vertice */
 
-ll maximaDistanciaDesde(Grafo &g, ll desde, vector<ll> &camino)
-{
+ll maximaDistanciaDesde(Grafo& g, ll desde, vector<ll>& camino) {
     vector<ll> distancia(g.size(), 10E9);
     vector<ll> padres(g.size(), -1);
     queue<ll> q;
     ll maximaDistancia = -1, lejano;
     distancia[desde] = 0;
     q.push(desde);
-    while (!q.empty())
-    {
+    while (!q.empty()) {
         ll actual = q.front();
         q.pop();
-        if (maximaDistancia < distancia[actual])
-        {
+        if (maximaDistancia < distancia[actual]) {
             maximaDistancia = distancia[actual];
             lejano = actual;
         }
-        for (ll vecino : g[actual])
-        {
-            if (distancia[vecino] > distancia[actual] + 1)
-            {
+        for (ll vecino : g[actual]) {
+            if (distancia[vecino] > distancia[actual] + 1) {
                 padres[vecino] = actual;
                 distancia[vecino] = distancia[actual] + 1;
                 q.push(vecino);
@@ -71,8 +63,7 @@ ll maximaDistanciaDesde(Grafo &g, ll desde, vector<ll> &camino)
         }
     }
     ll recorriendo = lejano;
-    while (recorriendo != -1)
-    {
+    while (recorriendo != -1) {
         camino.push_back(recorriendo);
         recorriendo = padres[recorriendo];
     }
@@ -82,8 +73,7 @@ ll maximaDistanciaDesde(Grafo &g, ll desde, vector<ll> &camino)
 
 /* Calculo de Diametro */
 
-vector<ll> calcularDiametro(Arbol &g, ll nodo)
-{
+vector<ll> calcularDiametro(Arbol& g, ll nodo) {
     vector<ll> camino;
     maximaDistanciaDesde(g, nodo, camino);
     ll extremo = camino.back();
@@ -94,19 +84,16 @@ vector<ll> calcularDiametro(Arbol &g, ll nodo)
 
 /* Convertir el arbol en un digrafo con arista dirigidas desde la raiz */
 
-void enraizar(Arbol &g, ll raiz)
-{
+void enraizar(Arbol& g, ll raiz) {
     vector<bool> visitados(g.size(), false);
     queue<ll> q;
     q.push(raiz);
-    while (!q.empty())
-    {
+    while (!q.empty()) {
         ll actual = q.front();
         q.pop();
         visitados[actual] = true;
         vector<ll> hijos;
-        for (ll vecino : g[actual])
-        {
+        for (ll vecino : g[actual]) {
             if (visitados[vecino])
                 continue;
             hijos.push_back(vecino);
@@ -116,31 +103,26 @@ void enraizar(Arbol &g, ll raiz)
     }
 }
 
-/* Centro del arbol (medio del diametro) (minimiza distancia maxima)*/
+/* Centro del árbol (medio del diámetro) (minimiza distancia maxima)*/
 
-ll calcularCentro(vector<ll> diametro)
-{
+ll calcularCentro(vector<ll> diametro) {
     return diametro[diametro.size() / 2];
 }
 
 /* Separa componentes conexas */
 
-// TODO: Debuggear
-vector<Grafo> componentesConexas(Grafo &g)
-{
+vector<Grafo> componentesConexas(Grafo& g) {
     vector<bool> visitados(g.size(), false);
     vector<Grafo> grafos;
     queue<ll> q;
-    forr(nodo, g.size())
-    {
+    forr(nodo, g.size()) {
         if (visitados[nodo])
             continue;
         q.push(nodo);
         map<ll, ll> nuevosNombres;
         Grafo nuevo;
         ll aristas = 0;
-        while (!q.empty())
-        {
+        while (!q.empty()) {
             ll actual = q.front();
             q.pop();
             if (visitados[actual])
@@ -149,10 +131,8 @@ vector<Grafo> componentesConexas(Grafo &g)
             nuevosNombres[actual] = aristas;
             nuevo.push_back(vector<ll>());
             aristas++;
-            for (ll vecino : g[actual])
-            {
-                if (visitados[vecino])
-                {
+            for (ll vecino : g[actual]) {
+                if (visitados[vecino]) {
                     ll nombreVecino = nuevosNombres[vecino], nombreActual = nuevosNombres[actual];
                     nuevo[nombreActual].push_back(nombreVecino);
                     nuevo[nombreVecino].push_back(nombreActual);
@@ -167,12 +147,10 @@ vector<Grafo> componentesConexas(Grafo &g)
 
 /* IO Grafo */
 
-Grafo leerGrafo(ll vertices, ll aristas)
-{
+Grafo leerGrafo(ll vertices, ll aristas) {
     Grafo g(vertices);
     ll n1, n2;
-    forr(i, aristas)
-    {
+    forr(i, aristas) {
         cin >> n1 >> n2;
         n1--;
         n2--;
