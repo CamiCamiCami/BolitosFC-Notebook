@@ -2,6 +2,6 @@
 !*/
 !makefile
 !*.cpp
-!comandosDebug
+!comandosGDB
 !.gitignore
 !.clang-format

@@ -1,7 +1,6 @@
 define info
 info locals
-p inicios.top()
-p finales.top()
+info args
 end
 
 define cinfo
