@@ -26,22 +26,22 @@ vector<ll> componente;
 vector<bool> visitado;
 stack<ll> semiOrden;
 #define CENTINELA -1
-void visitar(Digrafo &g, ll nodo) {
+void visitarKosaraju(Digrafo &g, ll nodo) {
     if (visitado[nodo]) return;
     visitado[nodo] = true;
     for (auto [vecino, salida] : g[nodo]) {
         if (!salida) continue;
-        visitar(g, vecino);
+        visitarKosaraju(g, vecino);
     }
     semiOrden.push(nodo);
 }
 
-void asignar(Digrafo &g, ll nodo, ll comp) {
+void asignarKosaraju(Digrafo &g, ll nodo, ll comp) {
     if (componente[nodo] != CENTINELA) return;
     componente[nodo] = comp;
     for (auto [vecino, salida] : g[nodo]) {
         if (salida) continue;
-        asignar(g, vecino, comp);
+        asignarKosaraju(g, vecino, comp);
     }
 }
 
@@ -50,11 +50,11 @@ void asignar(Digrafo &g, ll nodo, ll comp) {
 void algoritmoKosaraju(Digrafo &g) {
     componente = vector<ll>(g.size(), CENTINELA);
     visitado = vector<bool>(g.size(), false);
-    forr(nodo, g.size()) { visitar(g, nodo); }
+    forr(nodo, g.size()) { visitarKosaraju(g, nodo); }
     ll nroComponentes = 0;
     while (!semiOrden.empty()) {
         ll nodo = semiOrden.top();
-        asignar(g, nodo, nroComponentes);
+        asignarKosaraju(g, nodo, nroComponentes);
         nroComponentes = max(nroComponentes, componente[nodo] + 1);
         semiOrden.pop();
     }
