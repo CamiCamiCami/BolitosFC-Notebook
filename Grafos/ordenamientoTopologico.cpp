@@ -26,7 +26,7 @@ vector<ll> ordenTopologico;
 vector<bool> visitado;
 vector<ll> marcas;
 ll ordenados;
-bool visitarTarjan(Digrafo g, ll nodo, ll marcaActual) {
+bool visitarTarjan(Digrafo &g, ll nodo, ll marcaActual) {
     if (visitado[nodo]) return true;
     if (marcas[nodo] == marcaActual) return false;
     marcas[nodo] = marcaActual;
@@ -40,7 +40,7 @@ bool visitarTarjan(Digrafo g, ll nodo, ll marcaActual) {
     return !hayCiclo;
 }
 
-bool ordenamientoTarjan(Digrafo g) {
+bool ordenamientoTarjan(Digrafo &g) {
     ordenTopologico = vector<ll>(g.size());
     visitado = vector<bool>(g.size(), false);
     marcas = vector<ll>(g.size(), -1);

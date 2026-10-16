@@ -10,10 +10,16 @@ UseTab: Never
 # Keep opening braces on the same line (K&R / Attach style)
 BreakBeforeBraces: Attach
 
-# Keep empty loop bodies
+# Keep empty loop bodies like: while (x);
+# Instead of:
+#   while (x)
+#       ;
 AllowShortBlocksOnASingleLine: Never
 AllowShortLoopsOnASingleLine: true
 
 # Keep single-line if statement bodies on the same line as the condition
 AllowShortIfStatementsOnASingleLine: AllIfsAndElse
+
+# Maximum line length before wrapping
+ColumnLimit: 150
 ...
