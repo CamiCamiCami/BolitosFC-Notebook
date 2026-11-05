@@ -5,9 +5,8 @@
 using namespace std;
 
 using Arbol = vector<vector<ll>>;
-vector<vector<ll>> ancestros; // La raíz es su propio ancestro
+vector<vector<ll>> ancestros; // La raiz es su propio ancestro
 vector<ll> profundidad;
-
 void calculaPrimerAncestro(Arbol &g, ll raiz) {
     stack<ll> p;
     p.push(raiz);
@@ -28,7 +27,7 @@ void calculaPrimerAncestro(Arbol &g, ll raiz) {
 
 void calculaKesimoAncestro(Arbol &g, ll k) {
     forr(i, g.size()) {
-        ll ancestro = ancestros[ancestros[i][k - 1]][k - 1]; // Cuidado si se cambia el ancestro de la raíz estándar
+        ll ancestro = ancestros[ancestros[i][k - 1]][k - 1]; // Cuidado si se cambia el ancestro de la raiz estandar
         ancestros[i].push_back(ancestro);
     }
 }

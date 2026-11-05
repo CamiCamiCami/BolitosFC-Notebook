@@ -47,21 +47,6 @@ vector<ll> calcularDiametro(Arbol &g, ll nodo) {
     return caminoDistancia;
 }
 
-/* Centro del árbol (medio del diámetro) (minimiza distancia maxima)*/
+/* Centro del arbol (medio del diametro) (minimiza distancia maxima)*/
 
 ll calcularCentro(vector<ll> diametro) { return diametro[diametro.size() / 2]; }
-
-/* IO Grafo */
-
-Grafo leerGrafo(ll vertices, ll aristas) {
-    Grafo g(vertices);
-    ll n1, n2;
-    forr(i, aristas) {
-        cin >> n1 >> n2;
-        n1--;
-        n2--;
-        g[n1].push_back(n2);
-        g[n2].push_back(n1);
-    }
-    return g;
-}

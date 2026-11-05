@@ -31,7 +31,7 @@ void asignarKosaraju(Digrafo &g, ll nodo, ll comp) {
     }
 }
 
-// Determina componentes fuertemente conexas de un dígrafo (aristas [vecino,
+// Determina componentes fuertemente conexas de un digrafo (aristas [vecino,
 // salida?])
 void algoritmoKosaraju(Digrafo &g) {
     componente = vector<ll>(g.size(), CENTINELA);
