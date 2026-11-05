@@ -6,3 +6,4 @@
 !.gitignore
 !.clang-format
 !*.tex
+!Notebook.pdf
