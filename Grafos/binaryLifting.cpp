@@ -1,5 +1,4 @@
-#include <stack>
-#include <vector>
+#include <bits/stdc++.h>
 #define ll long long
 #define forr(i, h) for (ll i = 0; i < h; i++)
 using namespace std;

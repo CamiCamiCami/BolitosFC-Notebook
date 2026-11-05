@@ -1,0 +1,129 @@
+% LTeX: enabled=false
+\documentclass[11pt,a4paper,oneside]{book}
+% --- Idioma y codificación ---
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{titlesec}
+
+% Elimina la etiqueta (número) del capítulo, pero conserva el título
+\titleformat{\chapter}[block]
+  {\normalfont\huge\bfseries} % formato del título
+  {}                          % etiqueta vacía: aquí iría "Capítulo N"
+  {0pt}                       % separación entre etiqueta y título
+  {}                          % código previo al título
+
+% --- Márgenes (ajusta a tu gusto) ---
+\usepackage[a4paper,margin=2.5cm,headheight=14pt]{geometry}
+
+% --- Código ---
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codebg}{RGB}{248,248,248}
+\definecolor{codekeyword}{RGB}{0,0,160}
+\definecolor{codecomment}{RGB}{0,110,0}
+\definecolor{codestring}{RGB}{150,0,0}
+
+\lstset{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small,       % tamaño del código
+  keywordstyle=\color{codekeyword}\bfseries,
+  commentstyle=\color{codecomment}\itshape,
+  stringstyle=\color{codestring},
+  numbers=left,                     % números de línea
+  numberstyle=\tiny\color{gray},
+  numbersep=8pt,
+  frame=single,
+  rulecolor=\color{gray!40},
+  breaklines=true,                  % ¡clave para imprimir!
+  showstringspaces=false,
+  tabsize=2,
+  captionpos=b,
+  extendedchars=true,
+  inputencoding=utf8,
+}
+
+% --- Entorno para cada programa ---
+\newenvironment{programa}[2]{%
+  \section{#1}%
+  \noindent #2\par\medskip
+}{%
+  \medskip
+}
+
+% --- Navegación en PDF (opcional pero útil) ---
+\usepackage[hidelinks]{hyperref}
+
+\begin{document}
+
+\frontmatter
+\title{Notebook de BolitosFC}
+\author{Camilo Sodo, Gaspar Hilman, Juan Ignacio Varisco}
+\date{\the\year}
+\maketitle
+\tableofcontents
+
+\mainmatter
+% LTeX: enabled=true
+
+
+\chapter{Generalidades}
+
+\begin{programa}{Plantilla}{Plantilla de código para competencias.}
+    \lstinputlisting[language=C++]{../template.cpp}
+\end{programa}
+
+\begin{programa}{Makefile}{Makefile para compilar el codigo mas comodamente.}
+    \lstinputlisting[language=make]{../makefile}
+\end{programa}
+
+\begin{programa}{Busqueda Binaria}{Plantilla de una busqueda binaria basica.}
+    \lstinputlisting[language=C++]{../binarySearch.cpp}
+\end{programa}
+
+\chapter{Grafos}
+
+\begin{programa}{Recorridos}{Plantillas para recorridos BFS y DFS.}
+    \lstinputlisting[language=C++]{../Grafos/template.cpp}
+\end{programa}
+
+\begin{programa}{Diametro en Arboles}{Calcula el camino mas largo de un árbol (su diametro).}
+    \lstinputlisting[language=C++]{../Grafos/DiametroArboles.cpp}
+\end{programa}
+
+\begin{programa}{Dijkstra}{Busca para todos los vertices la distancia minima desde un punto de partida dado.}
+    \lstinputlisting[language=C++]{../Grafos/Dijkstra.cpp}
+\end{programa}
+
+\begin{programa}{Ascenso Binario}{En arboles, permite encontrar un ancestro arbitrario de un vertice cualquiera rapidamente.}
+    \lstinputlisting[language=C++]{../Grafos/BinaryLifting.cpp}
+\end{programa}
+
+\begin{programa}{Primer Ancestro Común}{En arboles, permite encontrar rapidamente el menor ancestro común (lowest common ancestor) entre dos vertices arbitrarios. Utiliza ascenso binario.}
+    \lstinputlisting[language=C++]{../Grafos/PrimerAncestroComun.cpp}
+\end{programa}
+
+\begin{programa}{Componentes Furtemente Conexas}{Permite encontrar las componentes fuertemente conexas de un digrafo.}
+    \lstinputlisting[language=C++]{../Grafos/CompFuertementeConexas.cpp}
+\end{programa}
+
+\begin{programa}{Ordenamiento Topologico}{Ordena los vertices de un DAG (digrafo aciclico dirigido) de forma que toda arista e = (v->w) cumple que v precede a w en el orden. Sirve para determinar si el grafo no es aciclico.}
+    \lstinputlisting[language=C++]{../Grafos/OrdenTopologico.cpp}
+\end{programa}
+
+\chapter{Teoria de Números}
+
+\begin{programa}{Minimo Comun Multiplo/Divisor Comun Menor}{Calcula el mcm o dcm de dos numeros.}
+    \lstinputlisting[language=C++]{../Teoria de Numeros/mcm-dcm.cpp}
+\end{programa}
+
+\begin{programa}{Criba de Eratóstenes}{Calcula para todos los numeros menores a un N si son primos y su menor divisor.}
+    \lstinputlisting[language=C++]{../Teoria de Numeros/CribaEratostenes.cpp}
+\end{programa}
+
+\begin{programa}{Exponenciación Binaria}{Calcula rapidamente la enecima potencia de un numero. Util para conseguir el inverso modular.}
+    \lstinputlisting[language=C++]{../Teoria de Numeros/ExpBinaria.cpp}
+\end{programa}
+
+\backmatter
+\end{document}
