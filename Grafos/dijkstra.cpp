@@ -1,50 +1,27 @@
-#include <algorithm>
-#include <iostream>
-#include <list>
-#include <map>
 #include <queue>
-#include <set>
 #include <utility>
 #include <vector>
 #define ll long long
-#define dd long double
-#define forr(i, h) for (ll i = 0; i < h; i++)
-#define forrr(i, d, h) for (ll i = d; i < h; i++)
-#define techo(x, k) ((x + k - 1) / k)
-#define initArr(arr, largo, contenido) \
-    for (int i = 0; i < largo; i++)    \
-        arr[i] = contenido;
 using namespace std;
-using GrafoPesado = vector<vector<pair<ll, ll>>>;
-using Grafo = vector<vector<ll>>;
-using Arbol = vector<vector<ll>>;
 
+vector<ll> distanciasDijkstra;
+using GrafoPesado = vector<vector<pair<ll, ll>>>;
+using ElementoDijkstra = pair<ll, ll>;
 // TODO: testear
-int Dijkstra(GrafoPesado g, ll inicial, ll objetivo, ll nodos)
-{
-    vector<ll> pesos(nodos, -1);
-    vector<bool> visitados(nodos, false);
-    pesos[inicial] = 0;
-    priority_queue<pair<ll, ll>> queue;
-    queue.push({inicial, 0});
-    while (!queue.empty())
-    {
-        ll actual = queue.top().first;
-        ll pesoActual = queue.top().second;
+void Dijkstra(GrafoPesado g, ll inicial) {
+    distanciasDijkstra = vector<ll>(g.size(), 10e10);
+    distanciasDijkstra[inicial] = 0;
+    priority_queue<ElementoDijkstra, vector<ElementoDijkstra>, greater<ElementoDijkstra>> queue;
+    queue.push({0, inicial});
+    while (!queue.empty()) {
+        auto [distanciaActual, actual] = queue.top();
         queue.pop();
-        visitados[actual] = true;
-        if (pesos[actual] != pesoActual)
-            continue;
-        for (auto [vecino, peso] : g[actual])
-        {
-            if (peso == -1)
-                continue;
-            if (pesos[vecino] == -1 || pesos[vecino] > peso + pesos[actual])
-            {
-                pesos[vecino] = peso + pesos[actual];
-                queue.push({vecino, pesos[vecino]});
+        if (distanciasDijkstra[actual] < distanciaActual) continue;
+        for (auto [vecino, largoArista] : g[actual]) {
+            if (distanciasDijkstra[vecino] > largoArista + distanciaActual) {
+                distanciasDijkstra[vecino] = largoArista + distanciaActual;
+                queue.push({distanciasDijkstra[vecino], vecino});
             }
         }
     }
-    return pesos[objetivo];
 }

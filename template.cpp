@@ -1,12 +1,4 @@
-#include <algorithm>
-#include <iostream>
-#include <list>
-#include <map>
-#include <queue>
-#include <set>
-#include <stack>
-#include <utility>
-#include <vector>
+#include <bits/stdc++.h>
 #define ll long long
 #define dd long double
 #define ull unsigned long long
